@@ -8,26 +8,16 @@ public class NumberPrinter extends NumberIdentifier implements NumbersAndSymbols
     private char[] identifier;
     private String input;
 
-
-    // CONSTRUCTOR
-    public NumberPrinter(String input) {
-
-        // SETTING input STRING
-        this.input = input;
-        // CALLING 'saveIndexes' FUNCTION AND PASSING input VARIABLE
-        saveIndexes(input);
-    }
-
     // FROM 'NumberIdentifier.java'
     @Override
     public void saveIndexes(String input) {
 
         // INITIALIZING indexes AND identifier ARRAY
-        indexes = new int[input.length()];
-        identifier = new char[input.length()];
+        setIndexes(new int[input.length()]);
+        setIdentifier(new char[input.length()]);
 
         // FOR LOOP for THE STRING input
-        for (int i = 0; i < indexes.length; ++i){
+        for (int i = 0; i < getIndexes().length; ++i){
 
             // BOOLEAN FOR IDENTIFYING OUR CHARACTER FROM STRING
             boolean found = false;
@@ -37,9 +27,9 @@ public class NumberPrinter extends NumberIdentifier implements NumbersAndSymbols
                 // IF CHARACTER FROM STRING IS A DIGIT
                 if (input.charAt(i) == NumberChars[j]) {
                     // SAVING INDEXES
-                    indexes[i] = j;
+                    getIndexes()[i] = j;
                     // SAVING IDENTIFIER
-                    identifier[i] = Number;
+                    getIdentifier()[i] = Number;
                     // SETTING found to TRUE
                     found = true;
                     // BREAK FROM FOR LOOP
@@ -51,9 +41,9 @@ public class NumberPrinter extends NumberIdentifier implements NumbersAndSymbols
                 // IF CHARACTER FROM STRING IS A SYMBOL
                 if (input.charAt(i) == SymbolChars[j]) {
                     // SAVING INDEXES
-                    indexes[i] = j;
+                    getIndexes()[i] = j;
                     // SAVING IDENTIFIER
-                    identifier[i] = Symbol;
+                    getIdentifier()[i] = Symbol;
                     // BREAK FROM FOR LOOP
                     break;
                 }
@@ -71,13 +61,13 @@ public class NumberPrinter extends NumberIdentifier implements NumbersAndSymbols
         for (int i = 0; i < displayHeight; ++i) {
 
             // FOR LOOP for INDEXES ARRAY
-            for (int j = 0; j < indexes.length; ++j) {
+            for (int j = 0; j < getIndexes().length; ++j) {
 
                 // PRINTING ROW IF IT IS A DIGIT
-                if (identifier[j] == Number) print(NumbersArray[indexes[j]][i]);
+                if (getIdentifier()[j] == Number) print(NumbersArray[getIndexes()[j]][i]);
 
                 // PRINTING ROW IF IT IS A SYMBOL
-                else if (identifier[j] == Symbol) print(SymbolsArray[indexes[j]][i]);
+                else if (getIdentifier()[j] == Symbol) print(SymbolsArray[getIndexes()[j]][i]);
             }
             // NEW LINE FOR NEW ROW
             println("");
@@ -88,16 +78,16 @@ public class NumberPrinter extends NumberIdentifier implements NumbersAndSymbols
     public void calculator() {
 
         // INITIALIZING calc
-        calc = new Calculator(input);
+        setCalc();
 
         // CHECK IF input IS VALID FOR COMPUTATION
-        if (calc.isValid()) {
+        if (getCalc().isValid()) {
 
             // TRY CATCH IN CASE OF ARITHMETIC ERROR
             try {
 
                 // LOCAL VARIABLE FOR THE RESULT OF CALCULATION
-                double res = calc.calculate();
+                double res = getCalc().calculate();
                 String str = String.valueOf(res);
 
                 // IF RESULT IS WHOLE NUMBER IT WILL CONVERT TO INT
@@ -117,5 +107,37 @@ public class NumberPrinter extends NumberIdentifier implements NumbersAndSymbols
         }
         // IF input HAS NO OPERATOR
         else println("\n--- No valid operator found ---");
+    }
+
+    public Calculator getCalc() {
+        return calc;
+    }
+
+    public void setCalc() {
+        this.calc = new Calculator(getInput());
+    }
+
+    public int[] getIndexes() {
+        return indexes;
+    }
+
+    public void setIndexes(int[] indexes) {
+        this.indexes = indexes;
+    }
+
+    public char[] getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(char[] identifier) {
+        this.identifier = identifier;
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 }

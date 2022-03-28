@@ -20,9 +20,11 @@ public class TimePrinter implements NumbersAndSymbols {
         // CONSTRUCTING date STRING
         date = df.format(cal.get(Calendar.HOUR)) + ":" + df.format(cal.get(Calendar.MINUTE));
         // INITIALIZING np
-        np = new NumberPrinter(date);
+        np = new NumberPrinter();
+        // SETTING INPUT
+        np.setInput(date);
         // CALLING saveIndexes FUNCTION FROM np
-        np.saveIndexes(date);
+        np.saveIndexes(np.getInput());
         // CALLING display FUNCTION FROM np
         np.display();
     }

@@ -15,7 +15,7 @@ public class Calculator implements  NumbersAndSymbols {
     Calculator(String input) {
 
         // SETTING input
-        this.input = input;
+        this.setInput(input);
     }
 
     public boolean isValid() {
@@ -24,9 +24,9 @@ public class Calculator implements  NumbersAndSymbols {
         try {
 
             // SPLITTING INPUT FROM [-*/+] CHARACTERS
-            String[] nums = input.split("[-*/+]");
+            String[] nums = getInput().split("[-*/+]");
             // SPLITTING INPUT FROM DIGIT CHARACTERS
-            String[] symbolArray = input.split("[0-9\\.0-9]");
+            String[] symbolArray = getInput().split("[0-9\\.0-9]");
 
             // LOCAL VARIABLE FOR HOW MANY OPERATOR input HAS
             int symbolCount = 0;
@@ -37,18 +37,18 @@ public class Calculator implements  NumbersAndSymbols {
                 // CHECK IF symbolArray IS AN OPERATOR
                 if (Pattern.matches("[-+*/]", symbolArray[i])) {
 
-                    symbol = symbolArray[i].charAt(0);
+                    setSymbol(symbolArray[i].charAt(0));
                     symbolCount += 1;
                 }
 
             // CHECK IF VARIABLES IS VALID
-            if (nums.length != 2 || symbolCount != 1 || !Pattern.matches("[-+*/]", String.valueOf(symbol))) return false;
+            if (nums.length != 2 || symbolCount != 1 || !Pattern.matches("[-+*/]", String.valueOf(getSymbol()))) return false;
 
             else {
 
                 // PARSING VARIABLES TO DOUBLES AND ASSIGNING TO x AND y
-                x = Double.parseDouble(nums[0]);
-                y = Double.parseDouble(nums[1]);
+                setX(Double.parseDouble(nums[0]));
+                setY(Double.parseDouble(nums[1]));
             }
         }
 
@@ -62,30 +62,62 @@ public class Calculator implements  NumbersAndSymbols {
     // PUBLIC FUNCTION FOR CALCULATING THE RESULT
     public double calculate() throws Exception{
 
-        switch (symbol) {
+        switch (getSymbol()) {
 
             // IF SYMBOL IS ADDITION
             case '+':
-            return x + y;
+            return getX() + getY();
 
                         // IF SYMBOL IS SUBTRACTION
                         case '-':
-                        return x - y;
+                        return getX() - getY();
 
             // IF SYMBOL IS DIVISION
             case '/':
             // IF y == 0 WILL THROW AN EXCEPTION
-            if (y == 0) throw new Exception("\nCannot divide by 0");
-            return  x / y;
+            if (getY() == 0) throw new Exception("\nCannot divide by 0");
+            return  getX() / getY();
 
                         // IF SYMBOL IS MULTIPLICATION
                         case '*':
-                        return x * y;
+                        return getX() * getY();
 
             // IF SYMBOL DOESN'T MATCH WILL RETURN 0
             default:
             return 0;
         }
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public char getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(char symbol) {
+        this.symbol = symbol;
     }
 }
 

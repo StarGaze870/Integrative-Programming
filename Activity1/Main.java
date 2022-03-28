@@ -23,7 +23,7 @@ public class Main {
 
         // CREATING SCANNER AND 'NumberPrinter' VARIABLE
         Scanner scanner = new Scanner(System.in);
-        NumberPrinter num;
+        NumberPrinter num = new NumberPrinter();
 
         /*  DO WHILE
          *  LOOPS UNTIL THE USER INPUTS 'q' or 'quit'
@@ -51,8 +51,10 @@ public class Main {
             // CHECK IF INPUT IS VALID
             else {
 
-                // INITIALIZING num
-                num = new NumberPrinter(input);
+                // INITIALIZING num setInput
+                num.setInput(input);
+                // CALLING savedIndexes() FUNCTION OF num
+                num.saveIndexes(num.getInput());
                 // CALLING THE display() FUNCTION OF num
                 num.display();
                 // CALLING THE calculator() FUNCTION OF num
