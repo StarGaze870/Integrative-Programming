@@ -13,6 +13,7 @@ public class TimePrinter implements NumbersAndSymbols {
     private DecimalFormat df = new DecimalFormat("###,#00");
     private String date;
 
+    // CONSTRUCTOR
     public TimePrinter() {
 
         // INITIALIZING cal

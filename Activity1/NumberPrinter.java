@@ -1,6 +1,6 @@
 package Activity1;
 
-public class NumberPrinter extends NumberIdentifier implements NumbersAndSymbols {
+public class NumberPrinter extends NumberIdentifier implements NumbersAndSymbols{
 
     // VARIABLES
     private Calculator calc;
